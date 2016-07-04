@@ -6,6 +6,28 @@
     }
 }
 
+function Add-PostBuildEvent ($project, $installPath) {
+    $currentPostBuildCmd = $project.Properties.Item("PostBuildEvent").Value
+    $postBuildCmd = Get-PostBuildCommand $installPath
+    # Append our post build command if it's not already there
+    if (!$currentPostBuildCmd.Contains($postBuildCmd)) {
+        $project.Properties.Item("PostBuildEvent").Value += $postBuildCmd
+    }
+}
+
+function Get-PostBuildCommand ($installPath) {
+    Write-Host $dte.Solution.FullName $installPath
+    $solutionDir = [IO.Path]::GetDirectoryName($dte.Solution.FullName) + "\"
+    $path = $installPath.Replace($solutionDir, "`$(SolutionDir)")
+
+    $ResourcesDir = Join-Path $path "Resources"
+    $resources = $(Join-Path $ResourcesDir "*.*")
+
+    return "
+    if not exist `"`$(TargetDir)Resources`" md `"`$(TargetDir)Resources`"
+    xcopy /s /y `"$resources`" `"`$(TargetDir)Resources`""
+}
+
 function Add-FilesToDirectory ($srcDirectory, $destDirectory) {
     ls $srcDirectory -Recurse -Filter *.dll  | %{
         $srcPath = $_.FullName
@@ -30,4 +52,4 @@ function Add-FilesToDirectory ($srcDirectory, $destDirectory) {
     }
 }
 
-Export-ModuleMember -function Get-ProjectRoot, Add-FilesToDirectory
+Export-ModuleMember -function Get-ProjectRoot, Add-FilesToDirectory, Add-PostBuildEvent, Get-PostBuildCommand
