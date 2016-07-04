@@ -16,9 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoInfo.Tests", "GeoInfo.Tests\GeoInfo.Tests.csproj", "{E2AED8C4-EF69-420F-A18D-B70468BF1BF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51379EA7-7189-4E87-96B4-736F4E7F6E0C}"
-	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
