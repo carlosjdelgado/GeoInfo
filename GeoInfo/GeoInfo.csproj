@@ -97,6 +97,7 @@
     </None>
     <None Include="GeoInfo.nuspec" />
     <None Include="NugetTools\Install.ps1" />
+    <None Include="NugetTools\Uninstall.ps1" />
     <None Include="NugetTools\VS.psd1" />
     <None Include="NugetTools\VS.psm1" />
     <None Include="packages.config" />

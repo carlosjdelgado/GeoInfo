@@ -1,12 +1,4 @@
-﻿function Get-ProjectRoot($project) {
-    try {
-        $project.Properties.Item("FullPath").Value
-    } catch {
-
-    }
-}
-
-function Add-PostBuildEvent ($project, $installPath) {
+﻿function Add-PostBuildEvent ($project, $installPath) {
     $currentPostBuildCmd = $project.Properties.Item("PostBuildEvent").Value
     $postBuildCmd = Get-PostBuildCommand $installPath
     # Append our post build command if it's not already there
@@ -28,28 +20,18 @@ function Get-PostBuildCommand ($installPath) {
     xcopy /s /y `"$resources`" `"`$(TargetDir)Resources`""
 }
 
-function Add-FilesToDirectory ($srcDirectory, $destDirectory) {
-    ls $srcDirectory -Recurse -Filter *.dll  | %{
-        $srcPath = $_.FullName
+function Remove-PostBuildEvent ($project, $installPath) {
+    $postBuildCmd = Get-PostBuildCommand $installPath
+    
+    try {
+        # Get the current Post Build Event cmd
+        $currentPostBuildCmd = $project.Properties.Item("PostBuildEvent").Value
 
-        $relativePath = $srcPath.Substring($srcDirectory.Length + 1)
-        $destPath = Join-Path $destDirectory $relativePath
-        
-        $fileSystem = Get-VsFileSystem
-        if (!(Test-Path $destPath)) {
-            $fileStream = $null
-            try {
-                $fileStream = [System.IO.File]::OpenRead($_.FullName)
-                $fileSystem.AddFile($destPath, $fileStream)
-            } catch {
-                # We don't want an exception to surface if we can't add the file for some reason
-            } finally {
-                if ($fileStream -ne $null) {
-                    $fileStream.Dispose()
-                }
-            }
-        }
+        # Remove our post build command from it (if it's there)
+        $project.Properties.Item("PostBuildEvent").Value = $currentPostBuildCmd.Replace($postBuildCmd, '')
+    } catch {
+        # Accessing $project.Properties might throw
     }
 }
 
-Export-ModuleMember -function Get-ProjectRoot, Add-FilesToDirectory, Add-PostBuildEvent, Get-PostBuildCommand
+Export-ModuleMember -function Add-PostBuildEvent, Get-PostBuildCommand, Remove-PostBuildEvent

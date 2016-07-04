@@ -2,4 +2,4 @@
 
 Import-Module (Join-Path $toolsPath VS.psd1)
 
-Add-PostBuildEvent $project $installPath
+Remove-PostBuildEvent $project $installPath
