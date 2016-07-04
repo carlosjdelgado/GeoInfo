@@ -1,5 +1,8 @@
 language: csharp
 solution: GeoInfo.sln
+install:
+  - nuget restore GeoInfo.sln
+  - nuget install xunit.runners -Version 1.9.2 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Debug GeoInfo.sln
-  - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./GeoInfo.Tests/bin/Debug/GeoInfo.Tests.dll
+  - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./GeoInfo.Tests/bin/Debug/GeoInfo.Tests.dll
