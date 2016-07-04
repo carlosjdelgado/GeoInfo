@@ -13,5 +13,6 @@
   </metadata>
   <files>
 	  <file src="Resources\*.*" target="Resources" />
+    <file src="NugetTools\*.*" target="tools" />
   </files>
 </package>

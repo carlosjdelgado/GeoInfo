@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="GeoInfo.nuspec" />
+    <None Include="NugetTools\Install.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
