@@ -1,15 +1,18 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Web;
-using Microsoft.Practices.Unity;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GeoInfo")]
-[assembly: AssemblyDescription("Powerful geo political data library")]
-[assembly: AssemblyCompany("Carlos Jiménez Delgado [www.carlosjdelgado.com]")]
-[assembly: AssemblyProduct("GeoInfo")]
+[assembly: AssemblyTitle("GeoInfo.Tests")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("GeoInfo.Tests")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -17,7 +20,7 @@ using Microsoft.Practices.Unity;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f8ef5b67-f477-4908-bba0-348747e89175")]
+[assembly: Guid("e2aed8c4-ef69-420f-a18d-b70468bf1bf1")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,24 +32,5 @@ using Microsoft.Practices.Unity;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-#if DEBUG
-[assembly: AssemblyInformationalVersion("0.1.0-rc1")]
-#else
-[assembly: AssemblyInformationalVersion("0.1.0")]
-#endif
-[assembly: AssemblyVersion("0.1.0")]
-[assembly: AssemblyFileVersion("0.1.0")]
-
-
-//[assembly: PreApplicationStartMethod(typeof(GeoInfo.Properties.Startup), "Start")]
-//namespace GeoInfo.Properties
-//{
-//    public class Startup
-//    {
-//        private static IUnityContainer _container;
-//        public static void Start()
-//        {
-//            _container = UnityConfig.SetDependencyResolverAndReturnContainer();
-//        }
-//    }
-//}
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

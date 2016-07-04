@@ -47,9 +47,7 @@ namespace GeoInfo
 
         private DateTime GetLocalDateTime()
         {
-            var utcNow = DateTime.Now.ToUniversalTime();
-            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(WindowsTimeZone);
-            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZoneInfo);
+            return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, WindowsTimeZone);
         }
 
         private Dictionary<string, string> BuildTranslations()
