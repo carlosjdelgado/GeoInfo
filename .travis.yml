@@ -1,0 +1,5 @@
+language: csharp
+solution: GeoInfo.sln
+script:
+  - xbuild /p:Configuration=Debug GeoInfo.sln
+  - mono ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./GeoInfo.Tests/bin/Debug/GeoInfo.Tests.dll
