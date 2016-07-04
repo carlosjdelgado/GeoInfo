@@ -44,7 +44,6 @@ namespace GeoInfo
         {
             return _geoInfoCountryFactory ?? (_geoInfoCountryFactory = new GeoInfoCountryFactory(_dbContext));
         }
-
         private GeoInfoLanguageFactory GetGeoInfoLanguageFactory()
         {
             return _geoInfoLanguageFactory ?? (_geoInfoLanguageFactory = new GeoInfoLanguageFactory(_dbContext));
