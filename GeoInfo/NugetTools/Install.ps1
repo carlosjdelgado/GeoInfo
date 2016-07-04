@@ -1,5 +1,7 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
+Import-Module (Join-Path $toolsPath VS.psd1)
+
 $projectRoot = Get-ProjectRoot $project
 if (!$projectRoot) {
     return;
