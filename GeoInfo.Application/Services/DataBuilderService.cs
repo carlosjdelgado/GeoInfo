@@ -22,7 +22,7 @@ namespace GeoInfo.Application.Services
             BuildLanguageData(geoLanguages);
             BuildCurrencyData(geoCountries);
             BuildCountryData(geoCountries, geoAlternateNames, geoLanguages);
-            //BuildCityData(geoNames, geoAlternateNames, geoLanguages, timeZonesMapping);
+            BuildCityData(geoNames, geoAlternateNames, geoLanguages, timeZonesMapping);
         }
 
         private void BuildCurrencyData(List<GeoCountryModel> geoCountries)
