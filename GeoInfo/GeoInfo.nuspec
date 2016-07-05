@@ -8,11 +8,12 @@
     <owners>$author$</owners>
     <licenseUrl>https://www.gnu.org/licenses/gpl.html</licenseUrl>
     <projectUrl>https://github.com/carlosjdelgado/GeoInfo</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/carlosjdelgado/GeoInfo/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
   </metadata>
   <files>
-	  <file src="Resources\*.*" target="Resources" />
+    <file src="Resources\*.*" target="Resources" />
     <file src="NugetTools\*.*" target="tools" />
   </files>
 </package>
