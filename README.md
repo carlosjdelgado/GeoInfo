@@ -1,6 +1,6 @@
 # GeoInfo [![Build status](https://ci.appveyor.com/api/projects/status/hk5720wxk67jay55?svg=true)](https://ci.appveyor.com/project/carlosjdelgado/geoinfo)
 
-A powerful geo political library data based on GeoNames database dump (http://download.geonames.org/export/dump/)
+A powerful geo political data library based on GeoNames database dump (http://download.geonames.org/export/dump/)
 
 You can get information of all countries and for cities with a population greather than 1000 people.
 
