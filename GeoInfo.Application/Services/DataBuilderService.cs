@@ -38,13 +38,13 @@ namespace GeoInfo.Application.Services
 
         private void BuildCityData(List<GeoNameModel> geoNames, List<GeoAlternateNameModel> geoAlternateNames, List<GeoLanguageModel> geoLanguages, Dictionary<string, string> timeZonesMapping)
         {
-            Parallel.ForEach(geoNames, async (n) =>
+            geoNames.ForEach(async (n) =>
             {
                 var citiesRepository = new CitiesRepository();
                 var countriesRepository = new CountriesRepository();
-                var countryId =  countriesRepository.FindByCode(n.CountryCode).Id;
+                var countryId = countriesRepository.FindByCode(n.CountryCode).Id;
                 await citiesRepository.InsertAsync(CityMapper.Map(n, geoAlternateNames, geoLanguages, timeZonesMapping, countryId));
-            }); 
+            });
         }
 
         private void BuildLanguageData(List<GeoLanguageModel> geoLanguages)
