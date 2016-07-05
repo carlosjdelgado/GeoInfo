@@ -16,7 +16,7 @@ namespace GeoInfo.Application.EntityMappers
         {
             return new City
             {
-                LocalName = geoName.Name,
+                Name = geoName.Name,
                 IataCode = BuildIataCode(geoName, geoAlternateNames),
                 Altitude = geoName.Elevation ?? geoName.DigitalElevationModel,
                 LastModification = geoName.LastModification,

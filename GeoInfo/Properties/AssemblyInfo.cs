@@ -38,15 +38,15 @@ using Microsoft.Practices.Unity;
 [assembly: AssemblyFileVersion("0.1.0")]
 
 
-//[assembly: PreApplicationStartMethod(typeof(GeoInfo.Properties.Startup), "Start")]
-//namespace GeoInfo.Properties
-//{
-//    public class Startup
-//    {
-//        private static IUnityContainer _container;
-//        public static void Start()
-//        {
-//            _container = UnityConfig.SetDependencyResolverAndReturnContainer();
-//        }
-//    }
-//}
+[assembly: PreApplicationStartMethod(typeof(GeoInfo.Properties.Startup), "Start")]
+namespace GeoInfo.Properties
+{
+    public class Startup
+    {
+        private static IUnityContainer _container;
+        public static void Start()
+        {
+            _container = UnityConfig.SetDependencyResolverAndReturnContainer();
+        }
+    }
+}
