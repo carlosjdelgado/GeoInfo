@@ -14,7 +14,7 @@ namespace GeoInfo.Application.Mappers
         {
             return new CountryDto
             {
-                Name = country.Name,
+                Name = country.LocalName,
                 Code = country.IsoCode,
                 Area = country.Area,
                 Population = country.Population,

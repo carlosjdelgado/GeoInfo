@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class LanguageConfig : GeoInfoEntityTypeConfiguration<Language>
+    public class LanguageConfig : EntityTypeConfiguration<Language>
     {
         public LanguageConfig()
         {

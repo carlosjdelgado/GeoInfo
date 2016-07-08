@@ -44,7 +44,7 @@ namespace GeoInfo.Infrastructure.Data.Repositories
                 _dbContext.Set<Country>()
                     .FirstOrDefault(
                         c =>
-                            c.Name == nameOrTranslation ||
+                            c.LocalName == nameOrTranslation ||
                             c.CountryTranslations.Any(t => t.Translation == nameOrTranslation));
         }
     }

@@ -16,7 +16,7 @@ namespace GeoInfo.Application.Mappers
 
             return new CityDto
             {
-                Name = city.Name,
+                Name = city.LocalName,
                 IataCode = city.IataCode,
                 Latitude = city.Latitude,
                 Longitude = city.Longitude,

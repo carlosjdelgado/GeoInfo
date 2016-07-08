@@ -18,7 +18,7 @@ namespace GeoInfo.Application.EntityMappers
                 IsoCode = geoCountry.IsoCode,
                 Area = geoCountry.Area,
                 ContinentCode = geoCountry.ContinentCode,
-                Name = geoCountry.Name,
+                LocalName = geoCountry.Name,
                 PhonePrefix = geoCountry.PhonePrefix,
                 Population = geoCountry.Population,
                 PostalCodeFormat = geoCountry.PostalCodeFormat,

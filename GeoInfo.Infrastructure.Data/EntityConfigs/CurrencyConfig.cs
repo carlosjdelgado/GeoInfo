@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class CurrencyConfig : GeoInfoEntityTypeConfiguration<Currency>
+    public class CurrencyConfig : EntityTypeConfiguration<Currency>
     {
         public CurrencyConfig()
         {

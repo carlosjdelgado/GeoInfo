@@ -123,10 +123,11 @@
       <Name>GeoInfo.Infrastructure.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\GeoInfo.sdf">
+    <None Include="Resources\GeoInfo.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

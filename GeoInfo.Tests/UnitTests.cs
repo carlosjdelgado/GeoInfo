@@ -16,11 +16,11 @@ namespace GeoInfo.Tests
             _geoInfo = new GeoInfo();
         }
 
-        //[Fact]
-        //public void WhenGeoInfoCityIsInstanciated_DoesNotThrow()
-        //{
-        //    var city = _geoInfo.Cities.GetByNameAndCountryCode("Jaén", "ES");
-        //}
+        [Fact]
+        public void WhenGeoInfoCityIsInstanciated_DoesNotThrow()
+        {
+            var city = _geoInfo.Cities.GetByNameAndCountryCode("Jaén", "ES");
+        }
 
         [Fact]
         public void WhenGeoInfoCountryIsInstanciated_DoesNotThrow()
@@ -40,12 +40,12 @@ namespace GeoInfo.Tests
             var country = _geoInfo.Languages.GetByCode("es");
         }
 
-        //[Fact]
-        //public void WhenGeoInfoCityIsInstanciated_InstanceHaveData()
-        //{
-        //    var city = _geoInfo.Cities.GetByNameAndCountryCode("Jaén", "ES");
-        //    Assert.NotNull(city);
-        //}
+        [Fact]
+        public void WhenGeoInfoCityIsInstanciated_InstanceHaveData()
+        {
+            var city = _geoInfo.Cities.GetByNameAndCountryCode("Jaén", "ES");
+            Assert.NotNull(city);
+        }
 
         [Fact]
         public void WhenGeoInfoCountryIsInstanciated_InstanceHaveData()
@@ -68,15 +68,15 @@ namespace GeoInfo.Tests
             Assert.NotNull(language);
         }
 
-        //[Fact]
-        //public void WhenGeoInfoCityLocalTimeIsRetrieved_TimeIsCorrect()
-        //{
-        //    var city = _geoInfo.Cities.GetByNameAndCountryCode("London", "GB");
-        //    var cityLocalTime = city.LocalTime;
-        //    var utcNow = DateTime.UtcNow;
-        //    var cityUtcTime = TimeZoneInfo.ConvertTimeToUtc(cityLocalTime, TimeZoneInfo.FindSystemTimeZoneById(city.WindowsTimeZone));
+        [Fact]
+        public void WhenGeoInfoCityLocalTimeIsRetrieved_TimeIsCorrect()
+        {
+            var city = _geoInfo.Cities.GetByNameAndCountryCode("London", "GB");
+            var cityLocalTime = city.LocalTime;
+            var utcNow = DateTime.UtcNow;
+            var cityUtcTime = TimeZoneInfo.ConvertTimeToUtc(cityLocalTime, TimeZoneInfo.FindSystemTimeZoneById(city.WindowsTimeZone));
 
-        //    Assert.True((utcNow - cityUtcTime).TotalSeconds <= 1);
-        //}
+            Assert.True((utcNow - cityUtcTime).TotalSeconds <= 1);
+        }
     }
 }

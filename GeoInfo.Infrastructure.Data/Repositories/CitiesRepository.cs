@@ -39,7 +39,7 @@ namespace GeoInfo.Infrastructure.Data.Repositories
 
         public List<City> FindByNameOrTranslation(string nameOrTranslation)
         {
-            var cities = _dbContext.Set<City>().Where(c => c.Name == nameOrTranslation).ToList();
+            var cities = _dbContext.Set<City>().Where(c => c.LocalName == nameOrTranslation).ToList();
             cities.AddRange(_dbContext.Set<City>().Where(c => c.CityTranslations.Any(t => t.Translation == nameOrTranslation)));
             return cities.Distinct().ToList();
         }

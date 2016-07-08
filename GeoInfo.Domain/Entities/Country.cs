@@ -9,7 +9,7 @@ namespace GeoInfo.Domain.Entities
     public class Country
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string LocalName { get; set; }
         public string IsoCode { get; set; }
         public double Area { get; set; }
         public long Population { get; set; }

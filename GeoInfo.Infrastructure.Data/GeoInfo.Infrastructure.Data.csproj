@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityConfigs\CityConfig.cs" />
-    <Compile Include="EntityConfigs\GeoInfoEntityTypeConfiguration.cs" />
     <Compile Include="EntityConfigs\LanguageConfig.cs" />
     <Compile Include="EntityConfigs\CurrencyConfig.cs" />
     <Compile Include="EntityConfigs\CountryTranslationConfig.cs" />
