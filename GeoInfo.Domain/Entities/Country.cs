@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GeoInfo.Domain.Entities
 {
@@ -21,7 +17,7 @@ namespace GeoInfo.Domain.Entities
         public string CurrencyCode { get; set; }
 
         public virtual Currency Currency { get; set; }
-        public virtual ICollection<Language> Languages { get; set; }
+        public virtual ICollection<CountryLanguage> CountryLanguages { get; set; }
         public virtual ICollection<City> Cities { get; set; }
         public virtual ICollection<CountryTranslation> CountryTranslations { get; set; }
     }

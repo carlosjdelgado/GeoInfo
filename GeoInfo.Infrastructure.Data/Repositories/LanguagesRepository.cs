@@ -1,8 +1,5 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.Repositories
@@ -11,19 +8,14 @@ namespace GeoInfo.Infrastructure.Data.Repositories
     {
         private readonly GeoInfoDbContext _dbContext;
 
-        public LanguagesRepository(string nameOrConnectionString)
+        public LanguagesRepository(string dbPath)
         {
-            _dbContext = new GeoInfoDbContext(nameOrConnectionString);
+            _dbContext = new GeoInfoDbContext(dbPath);
         }
 
         public LanguagesRepository(GeoInfoDbContext dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        public LanguagesRepository()
-        {
-            _dbContext = new GeoInfoDbContext();
         }
 
         public async Task InsertAsync(Language language)
@@ -34,7 +26,7 @@ namespace GeoInfo.Infrastructure.Data.Repositories
 
         public Language FindByCode(string languageCode)
         {
-            return _dbContext.Set<Language>().Find(languageCode);
+            return _dbContext.Languages.Where(x => x.LanguageCode == languageCode).FirstOrDefault();
         }
     }
 }

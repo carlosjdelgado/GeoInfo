@@ -1,8 +1,6 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.Repositories
@@ -11,19 +9,14 @@ namespace GeoInfo.Infrastructure.Data.Repositories
     {
         private readonly GeoInfoDbContext _dbContext;
 
+        public CitiesRepository(string dbPath)
+        {
+            _dbContext = new GeoInfoDbContext(dbPath);
+        }
+
         public CitiesRepository(GeoInfoDbContext dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        public CitiesRepository(string nameOrConnectionString)
-        {
-            _dbContext = new GeoInfoDbContext(nameOrConnectionString);
-        }
-
-        public CitiesRepository()
-        {
-            _dbContext = new GeoInfoDbContext();
         }
 
         public async Task InsertAsync(City city)

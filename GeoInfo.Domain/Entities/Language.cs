@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GeoInfo.Domain.Entities
 {
@@ -13,6 +9,6 @@ namespace GeoInfo.Domain.Entities
 
         public virtual ICollection<CityTranslation> CityTranslations { get; set; }
         public virtual ICollection<CountryTranslation> CountryTranslations { get; set; }
-        public virtual ICollection<Country> Countries { get; set; }
+        public virtual ICollection<CountryLanguage> CountryLanguages { get; set; }
     }
 }

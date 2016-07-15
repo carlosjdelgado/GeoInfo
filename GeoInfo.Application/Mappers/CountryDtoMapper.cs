@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeoInfo.Application.Models.Dtos;
 using GeoInfo.Domain.Entities;
 
@@ -25,7 +22,7 @@ namespace GeoInfo.Application.Mappers
                 PostalCodeRegex = country.PostalCodeRegex,
                 Currency = CurrencyDtoMapper.Map(country.Currency),
                 CountryTranslations = BuildCountryTranslations(country.CountryTranslations),
-                Languages = BuildLanguages(country.Languages)
+                Languages = BuildLanguages(country.CountryLanguages.Select(cl => cl.Language).ToList())
             };
         }
 

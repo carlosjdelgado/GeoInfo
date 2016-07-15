@@ -7,7 +7,6 @@ using System.Threading;
 using System.IO.Compression;
 using System.IO;
 using GeoInfo.Application.Services;
-using System.Data.SqlServerCe;
 
 namespace GeoInfo.DataBuilder
 {
@@ -15,8 +14,6 @@ namespace GeoInfo.DataBuilder
     {
         private static readonly GeoNamesService GeoNamesService = new GeoNamesService();
         private static readonly TimeZoneService TimeZoneService = new TimeZoneService();
-        private static readonly DataBuilderService DataBuilderService = new DataBuilderService();
-        private static readonly DataBaseService DataBaseService = new DataBaseService("GeoInfoDataBase");
         private static readonly FileSystemService FileSystemService = new FileSystemService();
         
         private static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(0);
@@ -25,15 +22,17 @@ namespace GeoInfo.DataBuilder
 
         static void Main(string[] args)
         {
-            FileSystemService.CreateFolderIfNotExist(OriginDataFolder);
-            FileSystemService.RemoveFiles(OriginDataFolder, "*.*");
+            var dataBuilderService = new DataBuilderService(Path.Combine(OriginDataFolder, "GeoInfo.db"));
 
-            var filesToDownload = BuildFilesToDownloadDictionary();
-            foreach (var fileToDownload in filesToDownload)
-            {
-                DownloadFile(fileToDownload.Key, fileToDownload.Value);
-                if (fileToDownload.Value.IndexOf(".zip") > 0) ExtractFile(fileToDownload.Value, OriginDataFolder);
-            }
+            //FileSystemService.CreateFolderIfNotExist(OriginDataFolder);
+            //FileSystemService.RemoveFiles(OriginDataFolder, "*.*");
+
+            //var filesToDownload = BuildFilesToDownloadDictionary();
+            //foreach (var fileToDownload in filesToDownload)
+            //{
+            //    DownloadFile(fileToDownload.Key, fileToDownload.Value);
+            //    if (fileToDownload.Value.IndexOf(".zip") > 0) ExtractFile(fileToDownload.Value, OriginDataFolder);
+            //}
 
             Console.Write("Extracting data from files... ");
             var geoNames = GeoNamesService.GetGeoNames();
@@ -47,12 +46,8 @@ namespace GeoInfo.DataBuilder
             Console.Write("Done\n");
 
             Console.Write("Creating database... ");
-            DataBuilderService.BuildData(geoNames, geoCountries, geoAlternateNames, geoLanguages, timeZonesMapping);
-            Console.Write("Done\n");
-
-            Console.Write("Compacting database... ");
-            DataBaseService.Compact();
-            Console.Write("Done\n");            
+            dataBuilderService.BuildData(geoNames, geoCountries, geoAlternateNames, geoLanguages, timeZonesMapping);
+            Console.Write("Done\n");           
         }
 
         private static void ExtractFile(string filePath, string destinationPath)

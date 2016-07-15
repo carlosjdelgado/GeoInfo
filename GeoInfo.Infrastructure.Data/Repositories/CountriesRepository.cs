@@ -1,8 +1,5 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.Repositories
@@ -11,9 +8,9 @@ namespace GeoInfo.Infrastructure.Data.Repositories
     {
         private readonly GeoInfoDbContext _dbContext;
 
-        public CountriesRepository(string nameOrConnectionString)
+        public CountriesRepository(string dbPath)
         {
-            _dbContext = new GeoInfoDbContext(nameOrConnectionString);
+            _dbContext = new GeoInfoDbContext(dbPath);
         }
 
         public CountriesRepository(GeoInfoDbContext dbContext)
@@ -21,15 +18,10 @@ namespace GeoInfo.Infrastructure.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public CountriesRepository()
-        {
-            _dbContext = new GeoInfoDbContext();
-        }
-
         public async Task InsertAsync(Country country)
         {
             _dbContext.Set<Country>().Add(country);
-            country.Languages.ToList().ForEach(l => _dbContext.Languages.Attach(l));                
+            country.CountryLanguages.ToList().ForEach(cl => _dbContext.Languages.Attach(cl.Language));
             await _dbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 

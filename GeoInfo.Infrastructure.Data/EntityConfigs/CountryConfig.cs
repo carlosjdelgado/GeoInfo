@@ -1,28 +1,20 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class CountryConfig : EntityTypeConfiguration<Country>
+    public class CountryConfig
     {
-        public CountryConfig()
+        public static void SetEntityBuilder(EntityTypeBuilder<Country> entityBuilder)
         {
-            ToTable("Countries");
-            HasKey(x => x.Id);
+            entityBuilder.ToTable("Countries");
+            entityBuilder.HasKey(x => x.Id);
 
-            HasMany(x => x.Cities).WithRequired(x => x.Country).HasForeignKey(x => x.CountryId);
-            HasRequired(x => x.Currency).WithMany(x => x.Countries).HasForeignKey(x => x.CurrencyCode);
-            HasMany(x => x.Languages).WithMany(x => x.Countries)
-                .Map(x => {
-                    x.MapLeftKey("CountryId");
-                    x.MapRightKey("LanguageCode");
-                    x.ToTable("CountriesLanguages");
-                });
+            entityBuilder.HasMany(x => x.Cities).WithOne(x => x.Country).HasForeignKey(x => x.CountryId);
+            entityBuilder.HasOne(x => x.Currency).WithMany(x => x.Countries).HasForeignKey(x => x.CurrencyCode);
+
+            entityBuilder.HasMany(x => x.CountryLanguages).WithOne(x => x.Country).HasForeignKey(x => x.CountryId);
         }
     }
 }

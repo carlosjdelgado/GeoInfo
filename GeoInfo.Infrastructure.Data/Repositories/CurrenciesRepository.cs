@@ -1,8 +1,5 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GeoInfo.Infrastructure.Data.Repositories
@@ -11,15 +8,11 @@ namespace GeoInfo.Infrastructure.Data.Repositories
     {
         private readonly GeoInfoDbContext _dbContext;
 
-        public CurrenciesRepository(string nameOrConnectionString)
+        public CurrenciesRepository(string dbPath)
         {
-            _dbContext = new GeoInfoDbContext(nameOrConnectionString);
+            _dbContext = new GeoInfoDbContext(dbPath);
         }
 
-        public CurrenciesRepository()
-        {
-            _dbContext = new GeoInfoDbContext();
-        }
 
         public CurrenciesRepository(GeoInfoDbContext dbContext)
         {
@@ -34,7 +27,7 @@ namespace GeoInfo.Infrastructure.Data.Repositories
 
         public Currency FindByCode(string currencyCode)
         {
-            return _dbContext.Currencies.Find(currencyCode);
+            return _dbContext.Currencies.Where(x => x.CurrencyCode == currencyCode).SingleOrDefault();
         }
     }
 }

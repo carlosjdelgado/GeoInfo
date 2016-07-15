@@ -1,22 +1,18 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class CountryLanguageConfig : EntityTypeConfiguration<CountryLanguage>
+    public class CountryLanguageConfig
     {
-        public CountryLanguageConfig()
+        public static void SetEntityBuilder(EntityTypeBuilder<CountryLanguage> entityBuilder)
         {
-            ToTable("CountryLanguages");
-            HasKey(x => new { x.CountryId, x.LanguageCode });
+            entityBuilder.ToTable("CountryLanguages");
+            entityBuilder.HasKey(x => new { x.CountryId, x.LanguageCode });
 
-            HasRequired(x => x.Country).WithMany(x => x.Languages).HasForeignKey(x => x.CountryId);
-            HasRequired(x => x.Language).WithMany(x => x.CountryLanguages).HasForeignKey(x => x.LanguageCode);
+            entityBuilder.HasOne(x => x.Country).WithMany(x => x.CountryLanguages).HasForeignKey(x => x.CountryId);
+            entityBuilder.HasOne(x => x.Language).WithMany(x => x.CountryLanguages).HasForeignKey(x => x.LanguageCode);
         }
     }
 }

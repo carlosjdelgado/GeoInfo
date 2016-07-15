@@ -43,6 +43,7 @@
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\CityTranslation.cs" />
     <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\CountryLanguage.cs" />
     <Compile Include="Entities\CountryTranslation.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Language.cs" />

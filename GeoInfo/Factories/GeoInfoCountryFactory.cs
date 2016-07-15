@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeoInfo.Application.Mappers;
+﻿using GeoInfo.Application.Mappers;
 using GeoInfo.Infrastructure.Data;
 using GeoInfo.Infrastructure.Data.Repositories;
 

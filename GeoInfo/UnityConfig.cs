@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using GeoInfo.Infrastructure.Data;
-using GeoInfo.Properties;
+﻿using GeoInfo.Infrastructure.Data;
 using Microsoft.Practices.Unity;
+using Microsoft.Data.Entity;
 
 namespace GeoInfo
 {

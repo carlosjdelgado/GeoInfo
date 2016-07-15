@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GeoInfo.Application.Models.DataBuilder;
 using GeoInfo.Domain.Entities;
-using GeoInfo.Infrastructure.Data;
-using GeoInfo.Infrastructure.Data.Repositories;
 using System.Linq;
 using GeoInfo.Application.EqualityComparers;
+using System;
 
 namespace GeoInfo.Application.EntityMappers
 {
@@ -24,10 +22,22 @@ namespace GeoInfo.Application.EntityMappers
                 PostalCodeFormat = geoCountry.PostalCodeFormat,
                 PostalCodeRegex = geoCountry.PostalCodeRegex,
                 TopLevelInternetDomain = geoCountry.TopLevelDomain,
-                Languages = BuildLanguages(geoCountry.Languages),
+                CountryLanguages = BuildCountryLanguages(geoCountry.Languages),
                 CountryTranslations = BuildCountryTranslations(geoCountry, geoAlternateNames, geoLanguages),
                 CurrencyCode = geoCountry.CurrencyCode                
             };
+        }
+
+        private static ICollection<CountryLanguage> BuildCountryLanguages(List<string> languageCodes)
+        {
+            var countryLanguages = new List<CountryLanguage>();
+
+            languageCodes.Where(l => l.Length == 2).ToList().ForEach(l => countryLanguages.Add(new CountryLanguage
+            {
+                LanguageCode = l
+            }));
+
+            return countryLanguages;
         }
 
         private static ICollection<CountryTranslation> BuildCountryTranslations(GeoCountryModel geoCountry, List<GeoAlternateNameModel> geoAlternateNames, List<GeoLanguageModel> geoLanguages)
@@ -48,17 +58,5 @@ namespace GeoInfo.Application.EntityMappers
             return countryTranslations.Distinct(new CountryTranslationComparer()).Select(t => t).ToList();
         }
 
-
-        private static ICollection<Language> BuildLanguages(List<string> languageCodes)
-        {
-            var languages = new List<Language>();
-
-            languageCodes.Where(l => l.Length == 2).ToList().ForEach(l => languages.Add(new Language
-            {
-                LanguageCode = l
-            }));
-
-            return languages;
-        }
     }
 }

@@ -1,21 +1,17 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class CurrencyConfig : EntityTypeConfiguration<Currency>
+    public class CurrencyConfig
     {
-        public CurrencyConfig()
+        public static void SetEntityBuilder(EntityTypeBuilder<Currency> entityBuilder)
         {
-            ToTable("Currencies");
-            HasKey(x => x.CurrencyCode);
+            entityBuilder.ToTable("Currencies");
+            entityBuilder.HasKey(x => x.CurrencyCode);
 
-            HasMany(x => x.Countries).WithRequired(x => x.Currency).HasForeignKey(x => x.CurrencyCode);
+            entityBuilder.HasMany(x => x.Countries).WithOne(x => x.Currency).HasForeignKey(x => x.CurrencyCode);
         }
     }
 }

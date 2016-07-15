@@ -1,23 +1,18 @@
 ﻿using GeoInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Metadata.Builders;
 
 namespace GeoInfo.Infrastructure.Data.EntityConfigs
 {
-    public class CityConfig : EntityTypeConfiguration<City>
+    public class CityConfig
     {
-        public CityConfig()
+        public static void SetEntityBuilder(EntityTypeBuilder<City> entityBuilder)
         {
-            ToTable("Cities");
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            entityBuilder.ToTable("Cities");
+            entityBuilder.HasKey(x => x.Id);
+            entityBuilder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
 
-            HasMany(x => x.CityTranslations).WithRequired(x => x.City).HasForeignKey(x => x.CityId);
+            entityBuilder.HasMany(x => x.CityTranslations).WithOne(x => x.City).HasForeignKey(x => x.CityId);
         }
     }
 }
