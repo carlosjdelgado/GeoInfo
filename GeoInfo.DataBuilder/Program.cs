@@ -24,15 +24,15 @@ namespace GeoInfo.DataBuilder
         {
             var dataBuilderService = new DataBuilderService(Path.Combine(OriginDataFolder, "GeoInfo.db"));
 
-            //FileSystemService.CreateFolderIfNotExist(OriginDataFolder);
-            //FileSystemService.RemoveFiles(OriginDataFolder, "*.*");
+            FileSystemService.CreateFolderIfNotExist(OriginDataFolder);
+            FileSystemService.RemoveFiles(OriginDataFolder, "*.*");
 
-            //var filesToDownload = BuildFilesToDownloadDictionary();
-            //foreach (var fileToDownload in filesToDownload)
-            //{
-            //    DownloadFile(fileToDownload.Key, fileToDownload.Value);
-            //    if (fileToDownload.Value.IndexOf(".zip") > 0) ExtractFile(fileToDownload.Value, OriginDataFolder);
-            //}
+            var filesToDownload = BuildFilesToDownloadDictionary();
+            foreach (var fileToDownload in filesToDownload)
+            {
+                DownloadFile(fileToDownload.Key, fileToDownload.Value);
+                if (fileToDownload.Value.IndexOf(".zip") > 0) ExtractFile(fileToDownload.Value, OriginDataFolder);
+            }
 
             Console.Write("Extracting data from files... ");
             var geoNames = GeoNamesService.GetGeoNames();
