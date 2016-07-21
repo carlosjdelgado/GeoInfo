@@ -19,6 +19,7 @@ namespace GeoInfo.Application.Services
 
         public void BuildData(List<GeoNameModel> geoNames, List<GeoCountryModel> geoCountries, List<GeoAlternateNameModel> geoAlternateNames, List<GeoLanguageModel> geoLanguages, Dictionary<string, string> timeZonesMapping)
         {
+            _dbContext.CreateDataBase();
             BuildLanguageData(geoLanguages);
             BuildCurrencyData(geoCountries);
             BuildCountryData(geoCountries, geoAlternateNames, geoLanguages);

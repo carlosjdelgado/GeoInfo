@@ -18,15 +18,17 @@ namespace GeoInfo.Infrastructure.Data
         public GeoInfoDbContext(string path) : base()
         {
             _dbPath = path;
-            Database.EnsureCreated();
+        }
+
+        public bool CreateDataBase()
+        {
+            return Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(string.Format("Data Source={0}", _dbPath));
         }
-
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
