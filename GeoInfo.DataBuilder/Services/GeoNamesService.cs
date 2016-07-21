@@ -9,10 +9,10 @@ namespace GeoInfo.DataBuilder.Services
 {
     public class GeoNamesService
     {
-        private const string GeoNamesDataFilePath = @".\Data\cities1000.txt";
-        private const string GeoAlternateNamesDataFilePath = @".\Data\alternateNames.txt";
-        private const string GeoCountriesDataFilePath = @".\Data\countryInfo.txt";
-        private const string GeoLanguagesDataFilePath = @".\Data\iso-languagecodes.txt";
+        private const string GeoNamesDataFilePath = @"./Data/cities1000.txt";
+        private const string GeoAlternateNamesDataFilePath = @"./Data/alternateNames.txt";
+        private const string GeoCountriesDataFilePath = @"./Data/countryInfo.txt";
+        private const string GeoLanguagesDataFilePath = @"./Data/iso-languagecodes.txt";
 
         public GeoNamesService()
         {

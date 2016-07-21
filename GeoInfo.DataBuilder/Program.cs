@@ -18,7 +18,7 @@ namespace GeoInfo.DataBuilder
         
         private static readonly SemaphoreSlim Semaphore = new SemaphoreSlim(0);
 
-        private const string OriginDataFolder = @".\Data";
+        private const string OriginDataFolder = @"./Data";
 
         static void Main(string[] args)
         {
