@@ -5,6 +5,8 @@ using GeoInfo.Application.EntityMappers;
 using GeoInfo.Application.Models.DataBuilder;
 using GeoInfo.Infrastructure.Data.Repositories;
 using GeoInfo.Infrastructure.Data;
+using System.Collections.Concurrent;
+using GeoInfo.Domain.Entities;
 
 namespace GeoInfo.Application.Services
 {
@@ -28,44 +30,52 @@ namespace GeoInfo.Application.Services
 
         private void BuildCurrencyData(List<GeoCountryModel> geoCountries)
         {
-            var currenciesRepository = new CurrenciesRepository(_dbContext);
             var geoCountriesFiltered = geoCountries.GroupBy(c => c.CurrencyCode).Select(c => c.First()).ToList();
 
-            geoCountriesFiltered.ForEach(async (c) =>
+            geoCountriesFiltered.ForEach(c =>
             {
-                await currenciesRepository.InsertAsync(CurrencyMapper.Map(c));
+                _dbContext.Currencies.Add(CurrencyMapper.Map(c));
             });
+
+            _dbContext.SaveChanges();
         }
 
         private void BuildCityData(List<GeoNameModel> geoNames, List<GeoAlternateNameModel> geoAlternateNames, List<GeoLanguageModel> geoLanguages, Dictionary<string, string> timeZonesMapping)
         {
-            var citiesRepository = new CitiesRepository(_dbContext);
             var countriesRepository = new CountriesRepository(_dbContext);
-            geoNames.ForEach(async (n) =>
+            var countriesDictionary = new Dictionary<string, int>();
+            _dbContext.Countries.ToList().ForEach(c => countriesDictionary.Add(c.IsoCode, c.Id));
+                
+            var citiesToAdd = new ConcurrentBag<City>();
+
+            geoNames.ForEach(n =>
             {
-                var countryId = countriesRepository.FindByCode(n.CountryCode).Id;
-                await citiesRepository.InsertAsync(CityMapper.Map(n, geoAlternateNames, geoLanguages, timeZonesMapping, countryId));
+                _dbContext.Add(CityMapper.Map(n, geoAlternateNames, geoLanguages, timeZonesMapping, countriesDictionary[n.CountryCode]));
             });
+
+            _dbContext.SaveChanges();
         }
 
         private void BuildLanguageData(List<GeoLanguageModel> geoLanguages)
         {
-            var languagesRepository = new LanguagesRepository(_dbContext);
             var geoLanguagesFiltered = geoLanguages.Where(l => !string.IsNullOrEmpty(l.Iso6391)).ToList();
-            geoLanguagesFiltered.ForEach(async (l) =>
+            geoLanguagesFiltered.ForEach(l =>
             {
-                await languagesRepository.InsertAsync(LanguageMapper.Map(l));
+                _dbContext.Languages.Add(LanguageMapper.Map(l));
 
             });
+
+            _dbContext.SaveChanges();
         }
 
         private void BuildCountryData(List<GeoCountryModel> geoCountries, List<GeoAlternateNameModel> geoAlternateNames, List<GeoLanguageModel> geoLanguages)
         {
-            var countriesRepository = new CountriesRepository(_dbContext);
-            geoCountries.ForEach(async (c) =>
+            geoCountries.ForEach(c =>
             {
-                await countriesRepository.InsertAsync(CountryMapper.Map(c, geoAlternateNames, geoLanguages));
+                _dbContext.Countries.Add(CountryMapper.Map(c, geoAlternateNames, geoLanguages));
             });
+
+            _dbContext.SaveChanges();
         }
     }
 }
